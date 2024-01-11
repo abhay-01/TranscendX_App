@@ -34,7 +34,7 @@ export default function Signup() {
     <ScrollView
       style={{
         flex: 1,
-        backgroundColor: "#092C4C", // Set background color to #092C4C
+        backgroundColor: "#092C4C", 
       }}
     >
       <SafeAreaView style={{ flex: 1 }}>
@@ -51,7 +51,7 @@ export default function Signup() {
             style={{
               padding: 10,
               borderRadius: 20,
-              backgroundColor: "white", // Back button in white color
+              backgroundColor: "white",
             }}
           >
             <ChevronLeftIcon size={20} color="#092C4C" />
@@ -69,7 +69,7 @@ export default function Signup() {
       >
         <View
           style={{
-            backgroundColor: "white", // White card background
+            backgroundColor: "white", 
             borderRadius: 20,
             padding: 20,
             marginBottom: 20,
