@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext}from "react";
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -13,8 +13,11 @@ import {
 } from "react-native-heroicons/outline";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
 
 export default function HomeScreen() {
+
+  const { userInfo,isLoading,logout} = useContext(AuthContext);
 
   const navigation = useNavigation();
   return (
@@ -38,7 +41,7 @@ export default function HomeScreen() {
             justifyContent: "flex-end",
           }}
         >
-          <TouchableOpacity>
+          <TouchableOpacity onPress={logout}>
             <EnvelopeIcon color={"white"} marginRight={10} />
           </TouchableOpacity>
           <TouchableOpacity>
@@ -49,6 +52,7 @@ export default function HomeScreen() {
             <Bars3Icon color={"white"} />
           </TouchableOpacity>
         </View>
+        
 
         <View
           style={{
@@ -58,6 +62,7 @@ export default function HomeScreen() {
             justifyContent: "space-between",
           }}
         >
+
           <TouchableOpacity>
             <GlobeEuropeAfricaIcon color={"white"} size={60} />
           </TouchableOpacity>

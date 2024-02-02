@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -7,17 +7,24 @@ import {
   UserIcon,
   LockClosedIcon,
 } from "react-native-heroicons/solid";
+import { AuthContext } from "../context/AuthContext";
+import Spinner from "react-native-loading-spinner-overlay";
 
 export default function Login() {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isLoading, login } = useContext(AuthContext);
 
   const handleLogin = () => {
-    // Implement your login logic here
-    // For example, you can call an API to authenticate the user
-    navigation.navigate("HomeScreen");
+    if (email && password ) {
+      login(email, password);
+      console.log(email + " " + password);
+      navigation.navigate("HomeScreen");
+    } else {
+      alert("All fields are required");
+    }
   };
 
   const handleForgotPassword = () => {
@@ -35,7 +42,7 @@ export default function Login() {
         paddingTop: 16,
       }}
     >
-    
+      <Spinner isVisible={isLoading} />
 
       <View
         style={{
@@ -59,8 +66,6 @@ export default function Login() {
             >
               Welome Back!
             </Text>
-
-            
           </View>
 
           <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import {
   View,
   Text,
@@ -16,18 +16,27 @@ import {
   LockClosedIcon,
   ChevronLeftIcon,
 } from "react-native-heroicons/solid";
+import { AuthContext } from "../context/AuthContext";
+import Spinner from "react-native-loading-spinner-overlay";
 
 export default function Signup() {
   const navigation = useNavigation();
 
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("abhay");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("abc");
+
+  const {isLoading,register} = useContext(AuthContext)
 
   const handleSubmit = () => {
-    // Implement your signup logic here
-    // For example, you can call an API to register the user
-    navigation.navigate("HomeScreen");
+    if(fullName && email && password){
+      register(fullName, email, password)
+      console.log(fullName + " " + email + " " + password);
+      navigation.navigate("HomeScreen");
+    }else{
+      alert("All fields are required")
+    }
+
   };
 
   return (
@@ -35,8 +44,8 @@ export default function Signup() {
       style={{
         flex: 1,
         backgroundColor: "#092C4C", 
-      }}
-    >
+      }}>
+      <Spinner/>
       <SafeAreaView style={{ flex: 1 }}>
         <View
           style={{
