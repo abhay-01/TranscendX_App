@@ -15,6 +15,7 @@
     "@react-navigation/stack": "^6.3.20",
     "@types/react": "~18.2.14",
     "axios": "^1.6.7",
+    "cors": "^2.8.5",
     "expo": "~49.0.15",
     "expo-dev-client": "~2.4.12",
     "expo-device": "~5.4.0",
@@ -34,5 +35,6 @@
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": true,
+  "proxy": "http:/localhost:3000"
 }

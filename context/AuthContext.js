@@ -10,29 +10,34 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
 
 
-    const register = (fullName,email,password) => {
-        setIsLoading(true);
-        axios.post(`${BASE_URL}/register`, {
-            fullName: "abhay",
-            email: "test@gmail.com",
-            password: "abcs"
-        })
-        .then(response => {
-            let info = response.data;
-            setUserInfo(info);
-            AsyncStorage.setItem('userInfo', JSON.stringify(info));
-            setIsLoading(false);
-            console.log(info);
-        })
-        .catch(error => {
-            console.log(error);
-            setIsLoading(false);
-        });
-    };
+    const register = async (fullName, email, password) => {
+        try{
+            const response = await axios.post(`${BASE_URL}/register`, {
+                fullName: fullName,
+                email: email,
+                password: password
+            });
+
+            console.log("Response: ", response.data);
+
+
+
+            if(response.status === 200 && response.data!= null) {
+                let info = response.data;
+                setUserInfo(info);
+                AsyncStorage.setItem('userInfo', JSON.stringify(info));
+                console.log("User registered successfully");
+        }
+       
+    }catch(error){
+        console.log("Error: ", error);
+    }
+}
+    
 
     const login = (email,password) => {
         setIsLoading(true);
-        axios.post(`${BASE_URL}/login`, {
+        axios.post("https://transcendx.onrender.com/login", {
             email: email,
             password: password
         })

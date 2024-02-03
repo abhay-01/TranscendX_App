@@ -18,21 +18,33 @@ import {
 } from "react-native-heroicons/solid";
 import { AuthContext } from "../context/AuthContext";
 import Spinner from "react-native-loading-spinner-overlay";
+import axios from "axios";
 
 export default function Signup() {
   const navigation = useNavigation();
 
-  const [fullName, setFullName] = useState("abhay");
-  const [email, setEmail] = useState("test@gmail.com");
-  const [password, setPassword] = useState("abc");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const {isLoading,register} = useContext(AuthContext)
 
-  const handleSubmit = () => {
-    if(fullName && email && password){
-      register(fullName, email, password)
-      console.log(fullName + " " + email + " " + password);
-      navigation.navigate("HomeScreen");
+  const handleSubmit = async() => {
+    if (fullName && email && password) {
+      axios({
+        method: "post",
+        url: "https://transcendx.onrender.com/register",
+        data:{
+          fullName,
+          email: email,
+          password: password
+        }
+      }).then((res)=>{
+        console.log("User registered successfully")
+        navigation.navigate("Login")
+      }).catch((err)=>{
+        console.log("Error in registering user",err)
+      })
     }else{
       alert("All fields are required")
     }
