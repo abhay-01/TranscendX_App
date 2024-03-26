@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, Image, TextInput, ToastAndroid } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -8,29 +8,48 @@ import {
   LockClosedIcon,
 } from "react-native-heroicons/solid";
 import { AuthContext } from "../context/AuthContext";
-import Spinner from "react-native-loading-spinner-overlay";
+import axios from "axios";
+
 
 export default function Login() {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoading, login } = useContext(AuthContext);
+  const { isLoading, login, userInfo} = useContext(AuthContext);
+  console.log("Login--->",userInfo);
+
 
   const handleLogin = () => {
-    if (email && password ) {
-      login(email, password);
-      console.log(email + " " + password);
+    const resp = axios.post("https://transcendx.onrender.com/login",{
+      email: email,
+      password: password
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((resp)=>{
+    //   alert("User logged in successfully")
+    // console.log("Response",resp.status());
+    // navigation.navigate("HomeScreen");
+    if(resp.status === 200 && resp.data!= null) {
+      let info = resp.data;
+      login(email,password);
+      console.log("User logged in successfully");
+      ToastAndroid
       navigation.navigate("HomeScreen");
-    } else {
-      alert("All fields are required");
+    }else if(resp.status === 401 || resp.data.message === "undefined" || resp.data === null){
+      alert(resp.data.message);
     }
+  }).catch((err)=>{
+    console.log("Error in logging in user",err);
+    ToastAndroid.show("Invalid Credentials", ToastAndroid.SHORT);
+  })
   };
 
   const handleForgotPassword = () => {
-    // Implement your forgot password logic here
-    // For example, you can navigate to a Forgot Password screen
-    navigation.navigate("ForgotPassword");
+    console.log("Forgot Password");
   };
 
   return (
@@ -42,7 +61,6 @@ export default function Login() {
         paddingTop: 16,
       }}
     >
-      <Spinner isVisible={isLoading} />
 
       <View
         style={{

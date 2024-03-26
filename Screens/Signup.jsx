@@ -17,7 +17,6 @@ import {
   ChevronLeftIcon,
 } from "react-native-heroicons/solid";
 import { AuthContext } from "../context/AuthContext";
-import Spinner from "react-native-loading-spinner-overlay";
 import axios from "axios";
 
 export default function Signup() {
@@ -57,7 +56,6 @@ export default function Signup() {
         flex: 1,
         backgroundColor: "#092C4C", 
       }}>
-      <Spinner/>
       <SafeAreaView style={{ flex: 1 }}>
         <View
           style={{

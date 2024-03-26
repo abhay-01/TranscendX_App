@@ -8,6 +8,8 @@ import HomeScreen from "../Screens/HomeScreen";
 import UploadImage from "../Screens/UploadImage";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import ResultScreen from "../Screens/ResultScreen";
+import Place from "../Screens/Place";
 
 const Stack = createStackNavigator();
 export default function AppNavigation() {
@@ -16,7 +18,7 @@ export default function AppNavigation() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName= "Login">
       <Stack.Screen
             name="HomeScreen"
             component={HomeScreen}
@@ -46,6 +48,22 @@ export default function AppNavigation() {
                 headerShown: false,
               }}
             />
+
+            <Stack.Screen
+              name="ResultScreen"
+              component={ResultScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+
+            <Stack.Screen
+            name = "Place"
+            component = {Place}
+            options = {{
+              headerShown: false,
+            }}
+          />
         {/* {userInfo?.access_token ? (
           <Stack.Screen
             name="HomeScreen"

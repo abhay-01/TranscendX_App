@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [userInfo, setUserInfo] = useState({});
+    const [userInfo, setUserInfo] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -20,11 +20,9 @@ export const AuthProvider = ({ children }) => {
 
             console.log("Response: ", response.data);
 
-
-
             if(response.status === 200 && response.data!= null) {
                 let info = response.data;
-                setUserInfo(info);
+                setUserInfo(email);
                 AsyncStorage.setItem('userInfo', JSON.stringify(info));
                 console.log("User registered successfully");
         }
@@ -43,11 +41,11 @@ export const AuthProvider = ({ children }) => {
         })
         .then(response => {
             if(response.status === 200 && response.data!= null) {
-            let info = response.data;
-            setUserInfo(info);
-            AsyncStorage.setItem('userInfo', JSON.stringify(info));
+            console.log("Async: ", email);    
+            setUserInfo(email);
+            AsyncStorage.setItem(userInfo, JSON.stringify(email));
             setIsLoading(false);
-            console.log(info);
+            console.log(userInfo);
             }else{
                 console.log(`Error: ${response.status}`);
             }
@@ -60,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
 
     const logout = () => {
-        AsyncStorage.removeItem('userInfo');
+        AsyncStorage.removeItem(email);
         setUserInfo({});
     }
 

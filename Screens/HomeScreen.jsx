@@ -1,4 +1,4 @@
-import React, {useContext,useState,useEffect}from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -17,31 +17,25 @@ import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 
 export default function HomeScreen() {
-
-  const { userInfo,isLoading,logout} = useContext(AuthContext);
-  const [users,setUsers] = useState([]);
+  const { userInfo, isLoading, logout } = useContext(AuthContext);
+  const [users, setUsers] = useState([]);
+  console.log("userInfo --- Home", userInfo);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          'https://transcendx.onrender.com',
-        );
-       setUsers(response.data);
+        const response = await axios.get("https://transcendx.onrender.com");
+        setUsers(response.data);
       } catch (e) {
-        console.log("Error",e);
+        console.log("Error", e);
       }
     };
-
     fetchData();
   }, []);
 
-  const getData = async()=>{
+  const getData = async () => {
     const res = await myFetchGet();
-    console.log("Response",res);
-  }
-
-  console.log("Users",users)
+  };
 
   const navigation = useNavigation();
   return (
@@ -65,7 +59,6 @@ export default function HomeScreen() {
             justifyContent: "flex-end",
           }}
         >
-       
           <TouchableOpacity onPress={logout}>
             <EnvelopeIcon color={"white"} marginRight={10} />
           </TouchableOpacity>
@@ -75,12 +68,8 @@ export default function HomeScreen() {
 
           <TouchableOpacity>
             <Bars3Icon color={"white"} />
-          </TouchableOpacity>  
-          
-
+          </TouchableOpacity>
         </View>
-     
-        
 
         <View
           style={{
@@ -90,8 +79,7 @@ export default function HomeScreen() {
             justifyContent: "space-between",
           }}
         >
-
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Place")}>
             <GlobeEuropeAfricaIcon color={"white"} size={60} />
           </TouchableOpacity>
 
@@ -99,7 +87,7 @@ export default function HomeScreen() {
             <HomeIcon color={"white"} size={60} />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={()=> navigation.navigate("UploadImage")}>
+          <TouchableOpacity onPress={() => navigation.navigate("UploadImage")}>
             <CameraIcon color={"white"} size={60} />
           </TouchableOpacity>
         </View>
