@@ -1,31 +1,31 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Image,TouchableOpacity} from 'react-native';
-import {CameraIcon,PhotoIcon} from "react-native-heroicons/outline";
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import * as ImagePicker from 'react-native-image-picker';
-import {PermissionsAndroid} from 'react-native';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { CameraIcon, PhotoIcon } from "react-native-heroicons/outline";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import * as ImagePicker from "react-native-image-picker";
+import { PermissionsAndroid } from "react-native";
 
-export const ImagePickerComp = () => {
+export const ImagePickerComp =  () => {
   const [responseCamera, setResponseCamera] = React.useState(null);
   const [responseGallery, setResponseGallery] = React.useState(null);
+  const [url, setUrl] = React.useState(null);
 
   const openCameraWithPermission = async () => {
     try {
-
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.CAMERA,
         {
-          title: 'App Camera Permission',
-          message: 'App needs access to your camera ',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
+          title: "App Camera Permission",
+          message: "App needs access to your camera ",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK",
+        }
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         ImagePicker.launchCamera(
           {
-            mediaType: 'photo',
+            mediaType: "photo",
             includeBase64: false,
             maxHeight: 200,
             maxWidth: 200,
@@ -33,72 +33,115 @@ export const ImagePickerComp = () => {
           (response) => {
             console.log(response);
             setResponseCamera(response);
+            console.log("Camera Response", response);
+
+            let newFile = {
+              uri: response.assets[0].uri,
+              type: `test/${response.assets[0].uri.split(".")[1]}`,
+              name: `test/${response.assets[0].uri.split(".")[1]}`,
+            }
+
+            handleUpload(newFile);
             setResponseGallery(null);
-          },
+          }
         );
       } else {
-        console.log('Camera permission denied');
+        console.log("Camera permission denied");
       }
     } catch (err) {
       console.warn(err);
     }
   };
 
-//   console.log("Gallery Camera",JSON.stringify(responseGallery,null,2));
+  const handleUpload = (image) => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "test_cl");
+    formData.append("cloud_name", "dctz4wuix");
+
+    fetch("https://api.cloudinary.com/v1_1/dctz4wuix/image/upload", {
+      method: "post",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Data-->", JSON.stringify(data, null, 2));
+        setUrl(data.url);
+      });
+  };
+
+
+
   return (
     <View
       style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
         margin: 4,
-      }}>
+      }}
+    >
       <TouchableOpacity onPress={() => openCameraWithPermission()}>
         {responseCamera === null ? (
-            <CameraIcon style = {{
-                height: 100,
-                width: 100,
-                color:"white"
-            }} />
+          <CameraIcon
+            style={{
+              height: 100,
+              width: 100,
+              color: "white",
+            }}
+          />
         ) : (
-            <Image style={{
-                height: 200,
-                width: 200,
-                color: "white"
-            
-            }} source={{uri: responseCamera.assets[0].uri}} />
+          <Image
+            style={{
+              height: 120,
+              width: 120,
+              color: "white",
+            }}
+            source={{ uri: responseCamera.assets[0].uri }}
+          />
         )}
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() =>
           ImagePicker.launchImageLibrary(
             {
-              mediaType: 'photo',
+              mediaType: "photo",
               includeBase64: false,
-              maxHeight: 200,
-              maxWidth: 200,
+              maxHeight: 120,
+              maxWidth: 120,
             },
             (response) => {
               setResponseGallery(response);
               setResponseCamera(null);
-            },
+              console.log("IMAGE RESPONSE", response);
+              let newFile = {
+                uri: response.assets[0].uri,
+                type: `test/${response.assets[0].uri.split(".")[1]}`,
+                name: `test/${response.assets[0].uri.split(".")[1]}`,
+              }
+              handleUpload(newFile);
+            }
           )
-        }>
+        }
+      >
         {responseGallery === null ? (
-            <PhotoIcon style ={{
-                height: 50,
-                width: 50,
-                color: "white"
-            
-            }} />
+          <PhotoIcon
+            style={{
+              height: 50,
+              width: 50,
+              color: "white",
+            }}
+          />
         ) : (
-            <Image style = {{
-                height: 200,
-                width: 200,
-                color: "white"
-            
-            }} source={{uri: responseGallery.assets[0].uri}} />
-            )}
+          <Image
+            style={{
+              height: 120,
+              width: 120,
+              color: "white",
+            }}
+            source={{ uri: responseGallery.assets[0].uri }}
+          />
+        )}
       </TouchableOpacity>
     </View>
   );
@@ -108,6 +151,6 @@ const styles = StyleSheet.create({
   icon: {
     height: 50,
     width: 50,
-    color: "white"
+    color: "white",
   },
 });

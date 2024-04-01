@@ -39,13 +39,14 @@ export default function UploadImage() {
       navigation.navigate("ResultScreen", {
         caption: caption,
         textSolution: textSolution,
-        url: url?url:" ",
+        url: url ? url : " ",
       });
     } catch (error) {
       console.error("Error generating image:", error);
     }
   };
 
+  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -77,12 +78,14 @@ export default function UploadImage() {
         <Text style={styles.submitText}>Submit</Text>
       </TouchableOpacity>
 
-      <Text style = {{
-        color: "white",
-        textAlign: "center",
-        marginTop: 20,
-        fontSize: 20
-      }}>
+      <Text
+        style={{
+          color: "white",
+          textAlign: "center",
+          marginTop: 20,
+          fontSize: 20,
+        }}
+      >
         OR
       </Text>
 
