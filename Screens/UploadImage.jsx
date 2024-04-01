@@ -10,6 +10,7 @@ import { ArrowUpOnSquareIcon } from "react-native-heroicons/outline";
 import { TextInput } from "react-native-gesture-handler";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { ImagePickerComp } from "../components/ImagePicker";
 
 export default function UploadImage() {
   const [description, setDescription] = useState("");
@@ -26,19 +27,22 @@ export default function UploadImage() {
           prompt: description,
         }
       );
+
+      console.log("Response", response.data);
       const { caption, textSolution, url } = response.data;
       setCaption(caption);
       setTextSolution(textSolution);
       setUrl(url);
 
       // Navigate to ResultScreen passing states as route params
+
       navigation.navigate("ResultScreen", {
         caption: caption,
         textSolution: textSolution,
-        url: url,
+        url: url?url:" ",
       });
     } catch (error) {
-      console.error(error);
+      console.error("Error generating image:", error);
     }
   };
 
@@ -72,6 +76,17 @@ export default function UploadImage() {
       <TouchableOpacity style={styles.submitButton} onPress={handlePress}>
         <Text style={styles.submitText}>Submit</Text>
       </TouchableOpacity>
+
+      <Text style = {{
+        color: "white",
+        textAlign: "center",
+        marginTop: 20,
+        fontSize: 20
+      }}>
+        OR
+      </Text>
+
+      <ImagePickerComp />
     </SafeAreaView>
   );
 }

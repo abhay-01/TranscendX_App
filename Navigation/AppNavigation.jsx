@@ -18,7 +18,7 @@ export default function AppNavigation() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName= "Login">
+      <Stack.Navigator>
       <Stack.Screen
             name="HomeScreen"
             component={HomeScreen}

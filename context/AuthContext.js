@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
             if(response.status === 200 && response.data!= null) {
             console.log("Async: ", email);    
             setUserInfo(email);
-            AsyncStorage.setItem(userInfo, JSON.stringify(email));
+            AsyncStorage.setItem(userInfo.fullName, JSON.stringify(email));
             setIsLoading(false);
             console.log(userInfo);
             }else{
