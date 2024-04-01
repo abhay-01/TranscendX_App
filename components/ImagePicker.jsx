@@ -58,14 +58,13 @@ export const ImagePickerComp = () => {
             <CameraIcon style = {{
                 height: 100,
                 width: 100,
-                color:"white"
+                color:"#000"
             }} />
         ) : (
             <Image style={{
                 height: 200,
                 width: 200,
-                color: "white"
-            
+                color: "#000"
             }} source={{uri: responseCamera.assets[0].uri}} />
         )}
       </TouchableOpacity>
@@ -88,14 +87,13 @@ export const ImagePickerComp = () => {
             <PhotoIcon style ={{
                 height: 50,
                 width: 50,
-                color: "white"
-            
+                color: "#000"
             }} />
         ) : (
             <Image style = {{
                 height: 200,
                 width: 200,
-                color: "white"
+                color: "#000"
             
             }} source={{uri: responseGallery.assets[0].uri}} />
             )}
@@ -108,6 +106,6 @@ const styles = StyleSheet.create({
   icon: {
     height: 50,
     width: 50,
-    color: "white"
+    color: "#000"
   },
 });
