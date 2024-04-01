@@ -59,7 +59,7 @@ export default function UploadImage() {
         {/* Image component to display the image */}
         <Image source={{ uri: url }} style={styles.image} />
       </View>
-
+      <Text style={{ color: '#000', marginVertical: 10, fontSize: 25, paddingHorizontal: 25 }}>Image Description</Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Describe your Image..."
