@@ -56,8 +56,8 @@ export const ImagePickerComp = () => {
       <TouchableOpacity onPress={() => openCameraWithPermission()}>
         {responseCamera === null ? (
             <CameraIcon style = {{
-                height: 50,
-                width: 50,
+                height: 100,
+                width: 100,
                 color:"white"
             }} />
         ) : (
