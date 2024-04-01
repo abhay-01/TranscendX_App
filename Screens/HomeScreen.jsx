@@ -1,20 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
-  EnvelopeIcon,
-  UserCircleIcon,
   Bars3Icon,
 } from "react-native-heroicons/solid";
-import {
-  GlobeEuropeAfricaIcon,
-  HomeIcon,
-  CameraIcon,
-} from "react-native-heroicons/outline";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
+import BottomTab from "../components/bottombar";
 
 export default function HomeScreen() {
   const { userInfo, isLoading, logout } = useContext(AuthContext);
@@ -42,7 +36,7 @@ export default function HomeScreen() {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#092C4C",
+        backgroundColor: "#fff",
       }}
     >
       <View
@@ -59,38 +53,11 @@ export default function HomeScreen() {
             justifyContent: "flex-end",
           }}
         >
-          <TouchableOpacity onPress={logout}>
-            <EnvelopeIcon color={"white"} marginRight={10} />
-          </TouchableOpacity>
           <TouchableOpacity>
-            <UserCircleIcon color={"white"} marginRight={10} />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Bars3Icon color={"white"} />
+            <Bars3Icon color={"#000"} size={30} />
           </TouchableOpacity>
         </View>
-
-        <View
-          style={{
-            marginTop: "auto",
-            margin: 23,
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <TouchableOpacity onPress={() => navigation.navigate("Place")}>
-            <GlobeEuropeAfricaIcon color={"white"} size={60} />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <HomeIcon color={"white"} size={60} />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigation.navigate("UploadImage")}>
-            <CameraIcon color={"white"} size={60} />
-          </TouchableOpacity>
-        </View>
+        <BottomTab logout={logout} />
       </View>
     </SafeAreaView>
   );

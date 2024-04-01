@@ -11,6 +11,7 @@ import { TextInput } from "react-native-gesture-handler";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { ImagePickerComp } from "../components/ImagePicker";
+import BottomTab from "../components/bottombar";
 
 export default function UploadImage() {
   const [description, setDescription] = useState("");
@@ -51,13 +52,7 @@ export default function UploadImage() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity>
-          <EnvelopeIcon color={"white"} marginRight={10} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <UserCircleIcon color={"white"} marginRight={10} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Bars3Icon color={"white"} />
+          <Bars3Icon color={"#000"} />
         </TouchableOpacity>
       </View>
 
@@ -65,7 +60,7 @@ export default function UploadImage() {
         {/* Image component to display the image */}
         <Image source={{ uri: url }} style={styles.image} />
       </View>
-
+      <Text style={{ color: '#000', marginVertical: 10, fontSize: 25, paddingHorizontal: 25 }}>Image Description</Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Describe your Image..."
@@ -78,6 +73,7 @@ export default function UploadImage() {
         <Text style={styles.submitText}>Submit</Text>
       </TouchableOpacity>
 
+<<<<<<< HEAD
       <Text
         style={{
           color: "white",
@@ -86,10 +82,20 @@ export default function UploadImage() {
           fontSize: 20,
         }}
       >
+=======
+      <Text style = {{
+        color: "#000",
+        textAlign: "center",
+        marginTop: 20,
+        fontSize: 20
+      }}>
+>>>>>>> e361515d924619f2fa170be3f92dee43903bf594
         OR
       </Text>
 
       <ImagePickerComp />
+      
+    <BottomTab style={{ marginTop: 'auto'}} />
     </SafeAreaView>
   );
 }
@@ -97,7 +103,7 @@ export default function UploadImage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#092C4C",
+    backgroundColor: "#fff",
   },
   header: {
     flexDirection: "row",
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 20
   },
   image: {
     width: 200,
@@ -116,21 +122,23 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   inputContainer: {
+    borderWidth: 2,
     backgroundColor: "white",
-    borderRadius: 30,
+    borderRadius: 10,
     marginHorizontal: 20,
-    paddingHorizontal: 20,
-    marginTop: 20,
+    padding: 20,
+    marginTop: 10,
+    height: 90,
   },
   textInput: {
     height: 50,
     borderRadius: 20,
-    marginTop: 20,
-    width: "100%",
+    marginTop: 0,
+    width: "90%",
   },
   submitButton: {
-    backgroundColor: "orange",
-    borderRadius: 30,
+    backgroundColor: "#000",
+    borderRadius: 10,
     marginHorizontal: 45,
     alignItems: "center",
     justifyContent: "center",

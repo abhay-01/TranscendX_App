@@ -83,6 +83,7 @@ export const ImagePickerComp =  () => {
     >
       <TouchableOpacity onPress={() => openCameraWithPermission()}>
         {responseCamera === null ? (
+<<<<<<< HEAD
           <CameraIcon
             style={{
               height: 100,
@@ -99,6 +100,19 @@ export const ImagePickerComp =  () => {
             }}
             source={{ uri: responseCamera.assets[0].uri }}
           />
+=======
+            <CameraIcon style = {{
+                height: 100,
+                width: 100,
+                color:"#000"
+            }} />
+        ) : (
+            <Image style={{
+                height: 200,
+                width: 200,
+                color: "#000"
+            }} source={{uri: responseCamera.assets[0].uri}} />
+>>>>>>> e361515d924619f2fa170be3f92dee43903bf594
         )}
       </TouchableOpacity>
       <TouchableOpacity
@@ -125,6 +139,7 @@ export const ImagePickerComp =  () => {
         }
       >
         {responseGallery === null ? (
+<<<<<<< HEAD
           <PhotoIcon
             style={{
               height: 50,
@@ -142,6 +157,21 @@ export const ImagePickerComp =  () => {
             source={{ uri: responseGallery.assets[0].uri }}
           />
         )}
+=======
+            <PhotoIcon style ={{
+                height: 50,
+                width: 50,
+                color: "#000"
+            }} />
+        ) : (
+            <Image style = {{
+                height: 200,
+                width: 200,
+                color: "#000"
+            
+            }} source={{uri: responseGallery.assets[0].uri}} />
+            )}
+>>>>>>> e361515d924619f2fa170be3f92dee43903bf594
       </TouchableOpacity>
     </View>
   );
@@ -151,6 +181,10 @@ const styles = StyleSheet.create({
   icon: {
     height: 50,
     width: 50,
+<<<<<<< HEAD
     color: "white",
+=======
+    color: "#000"
+>>>>>>> e361515d924619f2fa170be3f92dee43903bf594
   },
 });
