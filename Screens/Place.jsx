@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import axios from "axios";
-import { SafeAreaView } from "react-native-safe-area-context";
+import BottomTab from "../components/bottombar";
 
 const Place = () => {
   const [placeName, setPlaceName] = useState("");
@@ -44,10 +44,17 @@ const Place = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{
+          flex: 1,
+          backgroundColor: "#f0f0f0",
+          // alignItems: "center",
+          justifyContent: "center",
+    }}>
+    <View style={{alignItems: "center"}}>
+    <Text style={{color: '#000', paddingTop: 50, fontSize: 25, paddingBottom: 10}}>Name of Place</Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter place name"
+        placeholder="Type to search"
         value={placeName}
         onChangeText={setPlaceName}
       />
@@ -70,36 +77,30 @@ const Place = () => {
           ))}
         </ScrollView>
       )}
-      {/* <BottomTab logout={logout} /> */}
+      </View>
+    <BottomTab style={{ marginTop: 'auto'}} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f0f0f0",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-    marginTop: 20,
-  },
   input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
+    borderWidth: 2,
+    borderColor: "#000",
     borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-    width: "100%",
-    backgroundColor: "#fff",
+    marginBottom: 20,
+    width: "90%",
+    backgroundColor: "#ECECEC",
+    fontSize: 20,
+    padding: 20,
+    marginTop: 0,
   },
   button: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#000",
     padding: 10,
     borderRadius: 5,
-    width: "100%",
+    width: "80%",
     alignItems: "center",
-    justifyContent: "center",
     marginBottom: 10,
   },
   buttonText: {
@@ -107,17 +108,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   placeDetailsContainer: {
-    width: "100%",
+    width: "90%",
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: "bold",
     marginBottom: 10,
     marginTop: 20,
     color: "#333",
   },
   placeInfo: {
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 10,
     color: "#444",
   },
@@ -133,5 +134,4 @@ const styles = StyleSheet.create({
     color: "#444",
   },
 });
-
 export default Place;
