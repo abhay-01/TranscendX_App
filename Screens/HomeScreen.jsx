@@ -2,14 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
-  EnvelopeIcon,
-  UserCircleIcon,
   Bars3Icon,
-} from "react-native-heroicons/solid";
-import {
-  GlobeEuropeAfricaIcon,
   HomeIcon,
   CameraIcon,
+} from "react-native-heroicons/solid";
+import {
+  UserCircleIcon,
+  BellAlertIcon,
+  MapPinIcon,
 } from "react-native-heroicons/outline";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
@@ -42,7 +42,7 @@ export default function HomeScreen() {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#092C4C",
+        backgroundColor: "#fff",
       }}
     >
       <View
@@ -59,37 +59,70 @@ export default function HomeScreen() {
             justifyContent: "flex-end",
           }}
         >
-          <TouchableOpacity onPress={logout}>
-            <EnvelopeIcon color={"white"} marginRight={10} />
-          </TouchableOpacity>
+        
           <TouchableOpacity>
-            <UserCircleIcon color={"white"} marginRight={10} />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Bars3Icon color={"white"} />
+            <Bars3Icon color={"#000"} size={30} />
           </TouchableOpacity>
         </View>
 
         <View
           style={{
+            backgroundColor: '#ECECEC',
             marginTop: "auto",
-            margin: 23,
+            margin: 0,
+            padding: 10,
             flexDirection: "row",
             justifyContent: "space-between",
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("Place")}>
-            <GlobeEuropeAfricaIcon color={"white"} size={60} />
-          </TouchableOpacity>
-
           <TouchableOpacity>
-            <HomeIcon color={"white"} size={60} />
+            <View style={{ alignItems: 'center', paddingLeft: 5 }}>
+            <HomeIcon color={"#000"} size={50} />
+            <Text style={{ color: 'grey' }}>Home</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Place")}>
+          <View style={{ alignItems: 'center' }}>
+            <MapPinIcon color={"#000"} size={50} />
+            <Text style={{ color: 'grey' }}>Place</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("UploadImage")}>
+          <View style={{
+            backgroundColor: '#fff',
+            borderRadius: 60,
+            width: 80,
+            height: 80,
+            marginTop: -30,
+          }}>
+          <View style={{
+            backgroundColor: '#ECECEC',
+            borderRadius: 60,
+            width: 70,
+            height: 70,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginLeft: 5,
+            shadowColor: "#000",
+            elevation: 9,
+          }}>
+            <CameraIcon color={"#000"} size={50} />
+          </View>
+          </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ width: 50 }} onPress={logout}>
+          <View style={{ alignItems: 'center' }}>
+            <BellAlertIcon color={"#000"} size={50} />
+            <Text style={{ color: 'grey' }}>Inbox</Text>
+          </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+          <View style={{ alignItems: 'center', paddingRight: 5 }}>
+            <UserCircleIcon color={"#000"} size={50} />
+            <Text style={{ color: 'grey' }}>Account</Text>
+          </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigation.navigate("UploadImage")}>
-            <CameraIcon color={"white"} size={60} />
-          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
