@@ -83,24 +83,6 @@ export const ImagePickerComp =  () => {
     >
       <TouchableOpacity onPress={() => openCameraWithPermission()}>
         {responseCamera === null ? (
-<<<<<<< HEAD
-          <CameraIcon
-            style={{
-              height: 100,
-              width: 100,
-              color: "white",
-            }}
-          />
-        ) : (
-          <Image
-            style={{
-              height: 120,
-              width: 120,
-              color: "white",
-            }}
-            source={{ uri: responseCamera.assets[0].uri }}
-          />
-=======
             <CameraIcon style = {{
                 height: 100,
                 width: 100,
@@ -112,7 +94,6 @@ export const ImagePickerComp =  () => {
                 width: 200,
                 color: "#000"
             }} source={{uri: responseCamera.assets[0].uri}} />
->>>>>>> e361515d924619f2fa170be3f92dee43903bf594
         )}
       </TouchableOpacity>
       <TouchableOpacity
@@ -139,25 +120,6 @@ export const ImagePickerComp =  () => {
         }
       >
         {responseGallery === null ? (
-<<<<<<< HEAD
-          <PhotoIcon
-            style={{
-              height: 50,
-              width: 50,
-              color: "white",
-            }}
-          />
-        ) : (
-          <Image
-            style={{
-              height: 120,
-              width: 120,
-              color: "white",
-            }}
-            source={{ uri: responseGallery.assets[0].uri }}
-          />
-        )}
-=======
             <PhotoIcon style ={{
                 height: 50,
                 width: 50,
@@ -171,7 +133,6 @@ export const ImagePickerComp =  () => {
             
             }} source={{uri: responseGallery.assets[0].uri}} />
             )}
->>>>>>> e361515d924619f2fa170be3f92dee43903bf594
       </TouchableOpacity>
     </View>
   );
@@ -181,10 +142,6 @@ const styles = StyleSheet.create({
   icon: {
     height: 50,
     width: 50,
-<<<<<<< HEAD
-    color: "white",
-=======
     color: "#000"
->>>>>>> e361515d924619f2fa170be3f92dee43903bf594
   },
 });

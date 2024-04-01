@@ -73,23 +73,12 @@ export default function UploadImage() {
         <Text style={styles.submitText}>Submit</Text>
       </TouchableOpacity>
 
-<<<<<<< HEAD
-      <Text
-        style={{
-          color: "white",
-          textAlign: "center",
-          marginTop: 20,
-          fontSize: 20,
-        }}
-      >
-=======
       <Text style = {{
         color: "#000",
         textAlign: "center",
         marginTop: 20,
         fontSize: 20
       }}>
->>>>>>> e361515d924619f2fa170be3f92dee43903bf594
         OR
       </Text>
 
