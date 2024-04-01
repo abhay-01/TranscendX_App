@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import axios from "axios";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Place = () => {
   const [placeName, setPlaceName] = useState("");
@@ -53,7 +54,6 @@ const Place = () => {
       <TouchableOpacity style={styles.button} onPress={fetchData}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
-      
       {placeData && (
         <ScrollView style={styles.placeDetailsContainer}>
           <Text style={styles.sectionTitle}>Best Places to Visit</Text>
@@ -70,6 +70,7 @@ const Place = () => {
           ))}
         </ScrollView>
       )}
+      {/* <BottomTab logout={logout} /> */}
     </View>
   );
 };
