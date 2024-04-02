@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import { ImagePickerComp } from "../components/ImagePicker";
 import axios from "axios";
+import BottomTab from "../components/bottombar";
 
 const Caption = () => {
   const [imageUrl, setImageUrl] = useState(null);
@@ -42,7 +43,7 @@ const Caption = () => {
       <View style ={{
         alignItems: "center",
         justifyContent: "center",
-        padding: 20
+        // padding: 20
       }}>
 
       <Text style = {{
@@ -53,6 +54,8 @@ const Caption = () => {
       
       }}>{captions}</Text> 
             </View>
+
+            <BottomTab marginTop ="auto"/>
 
     </View>
   );
@@ -66,5 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     backgroundColor: "#f5f5f5",
+    marginTop:30
   },
 });
