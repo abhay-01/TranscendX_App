@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -40,12 +40,41 @@ export default function UploadImage() {
       navigation.navigate("ResultScreen", {
         caption: caption,
         textSolution: textSolution,
-        url: url?url:" ",
+        url: url ? url : " ",
       });
     } catch (error) {
       console.error("Error generating image:", error);
     }
   };
+
+  const fetchPrompt = async () => {
+    try {
+      const result = await axios.post(
+        "https://transcendx.onrender.com/prompt",
+        {
+          url: imageUrl,
+        }
+      );
+
+      console.log("Prompt:", result.data);
+      setDescription(result.data);
+      inputRef.current.focus();
+    } catch (error) {
+      console.log("Error fetching prompt:", error);
+    }
+  };
+
+  if (imageUrl) {
+    fetchPrompt();
+  }
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const handleImageUrl = (url) => {
+    // console.log("URL", url);
+    setImageUrl(url);
+  };
+
+  console.log("Passed URL", imageUrl);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -59,12 +88,23 @@ export default function UploadImage() {
         {/* Image component to display the image */}
         <Image source={{ uri: url }} style={styles.image} />
       </View>
-      <Text style={{ color: '#000', marginVertical: 10, fontSize: 25, paddingHorizontal: 25 }}>Image Description</Text>
+      <Text
+        style={{
+          color: "#000",
+          marginVertical: 10,
+          fontSize: 25,
+          paddingHorizontal: 25,
+        }}
+      >
+        Image Description
+      </Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Describe your Image..."
           style={styles.textInput}
           onChangeText={(text) => setDescription(text)}
+          value={description}
+          multiline
         />
       </View>
 
@@ -72,18 +112,20 @@ export default function UploadImage() {
         <Text style={styles.submitText}>Submit</Text>
       </TouchableOpacity>
 
-      <Text style = {{
-        color: "#000",
-        textAlign: "center",
-        marginTop: 20,
-        fontSize: 20
-      }}>
+      <Text
+        style={{
+          color: "#000",
+          textAlign: "center",
+          marginTop: 10,
+          fontSize: 20,
+        }}
+      >
         OR
       </Text>
 
-      <ImagePickerComp />
-      
-    <BottomTab style={{ marginTop: 'auto'}} />
+      <ImagePickerComp OnImageUrl={handleImageUrl} />
+
+      <BottomTab style={{ marginTop: "auto" }} />
     </SafeAreaView>
   );
 }
@@ -102,7 +144,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignItems: "center",
-    marginTop: 20
+    marginTop: 20,
   },
   image: {
     width: 200,
