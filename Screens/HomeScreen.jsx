@@ -59,7 +59,7 @@ export default function HomeScreen() {
         </View>
         
         <Image source={require('../assets/logo/logo.jpg')} style={{width: 320, height: 200, marginHorizontal: 40, marginTop: 20}} />
-        <Text style={{ fontSize: 17, marginLeft: 100, color: "grey", marginTop: 0 }}>AI Driven Content Creation</Text>
+        <Text style={{ fontSize: 17, marginLeft: 45, color: "grey", marginTop: 0 }}>Beyond the frame, beyond expectations</Text>
         <BottomTab logout={logout} />
       </View>
     </SafeAreaView>

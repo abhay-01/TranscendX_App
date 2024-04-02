@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, Image, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   EnvelopeIcon,
@@ -77,7 +77,10 @@ export default function UploadImage() {
   console.log("Passed URL", imageUrl);
 
   return (
+    
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
     <SafeAreaView style={styles.container}>
+    <View style={{ flexGrow: 1 }}>
       <View style={styles.header}>
         <TouchableOpacity>
           <Bars3Icon color={"#000"} />
@@ -91,7 +94,7 @@ export default function UploadImage() {
       <Text
         style={{
           color: "#000",
-          marginVertical: 10,
+          marginVertical: 0,
           fontSize: 25,
           paddingHorizontal: 25,
         }}
@@ -124,9 +127,10 @@ export default function UploadImage() {
       </Text>
 
       <ImagePickerComp OnImageUrl={handleImageUrl} />
-
-      <BottomTab style={{ marginTop: "auto" }} />
+      </View>
+      <BottomTab />
     </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -139,7 +143,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 13,
+    paddingTop: 13,
     justifyContent: "flex-end",
   },
   imageContainer: {
