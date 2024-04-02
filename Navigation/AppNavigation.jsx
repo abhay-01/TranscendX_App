@@ -15,68 +15,64 @@ import Caption from "../Screens/Caption";
 const Stack = createStackNavigator();
 export default function AppNavigation() {
   const { userInfo } = useContext(AuthContext);
-  console.log("userInfo", userInfo)
+  console.log("userInfo", userInfo);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="Signup"
-              component={Signup}
-              options={{
-                headerShown: false,
-              }}
-            />
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={{
+            headerShown: false,
+          }}
+        />
 
-            <Stack.Screen
-              name="UploadImage"
-              component={UploadImage}
-              options={{
-                headerShown: false,
-              }}
-            />
+        <Stack.Screen
+          name="UploadImage"
+          component={UploadImage}
+          options={{
+            headerShown: false,
+          }}
+        />
 
-            <Stack.Screen
-              name="ResultScreen"
-              component={ResultScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
+        <Stack.Screen
+          name="ResultScreen"
+          component={ResultScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
 
-            <Stack.Screen
-            name = "Place"
-            component = {Place}
-            options = {{
-              headerShown: false,
-            }}
+        <Stack.Screen
+          name="Place"
+          component={Place}
+          options={{
+            headerShown: false,
+          }}
+        />
 
-            
-          />
-
-<Stack.Screen
-            name = "Caption"
-            component = {Caption}
-            options = {{
-              headerShown: false,
-            }}
-
-            
-          />
+        <Stack.Screen
+          name="Caption"
+          component={Caption}
+          options={{
+            headerShown: false,
+          }}
+        />
         {/* {userInfo?.access_token ? (
           <Stack.Screen
             name="HomeScreen"
