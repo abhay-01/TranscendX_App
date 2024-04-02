@@ -5,7 +5,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import * as ImagePicker from "react-native-image-picker";
 import { PermissionsAndroid } from "react-native";
 
-export const ImagePickerComp =  () => {
+export const ImagePickerComp =  ({OnImageUrl}) => {
   const [responseCamera, setResponseCamera] = React.useState(null);
   const [responseGallery, setResponseGallery] = React.useState(null);
   const [url, setUrl] = React.useState(null);
@@ -66,10 +66,11 @@ export const ImagePickerComp =  () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Data-->", JSON.stringify(data, null, 2));
+        // console.log("IMAGE URL", data.url)
         setUrl(data.url);
+        OnImageUrl(data.url);
       });
   };
-
 
 
   return (
@@ -108,7 +109,6 @@ export const ImagePickerComp =  () => {
             (response) => {
               setResponseGallery(response);
               setResponseCamera(null);
-              console.log("IMAGE RESPONSE", response);
               let newFile = {
                 uri: response.assets[0].uri,
                 type: `test/${response.assets[0].uri.split(".")[1]}`,
@@ -137,11 +137,3 @@ export const ImagePickerComp =  () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  icon: {
-    height: 50,
-    width: 50,
-    color: "#000"
-  },
-});
