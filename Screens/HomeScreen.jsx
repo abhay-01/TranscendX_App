@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Bars3Icon,
@@ -50,9 +50,10 @@ export default function HomeScreen() {
             alignItems: "center",
             paddingHorizontal: 20,
             paddingVertical: 13,
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
           }}
         >
+        <Image source={require('../assets/logo/logo.jpg')} style={{width: 80, height: 50, marginTop:5, marginBottom: 2}} />
           <TouchableOpacity>
             <Bars3Icon color={"#000"} size={30} />
           </TouchableOpacity>
