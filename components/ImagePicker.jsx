@@ -84,11 +84,20 @@ export const ImagePickerComp =  ({OnImageUrl}) => {
     >
       <TouchableOpacity onPress={() => openCameraWithPermission()}>
         {responseCamera === null ? (
+          <View style = {{
+            alignItems: "center"
+            
+          }}>
             <CameraIcon style = {{
-                height: 100,
-                width: 100,
+                height: 300,
+                width: 200,
                 color:"#000"
             }} />
+            <Text style = {{
+                color: "#000"
+            
+            }}>Camera</Text>
+            </View>
         ) : (
             <Image style={{
                 height: 200,
@@ -120,11 +129,20 @@ export const ImagePickerComp =  ({OnImageUrl}) => {
         }
       >
         {responseGallery === null ? (
-            <PhotoIcon style ={{
-                height: 50,
-                width: 50,
-                color: "#000"
-            }} />
+            <View style = {{
+              alignItems: "center"
+              
+            }}>
+              <PhotoIcon style = {{
+                  height: 300,
+                  width: 200,
+                  color:"#000"
+              }} />
+              <Text style = {{
+                  color: "#000"
+              
+              }}>Gallery</Text>
+              </View>
         ) : (
             <Image style = {{
                 height: 200,

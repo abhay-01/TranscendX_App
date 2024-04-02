@@ -10,6 +10,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import ResultScreen from "../Screens/ResultScreen";
 import Place from "../Screens/Place";
+import Caption from "../Screens/Caption";
 
 const Stack = createStackNavigator();
 export default function AppNavigation() {
@@ -63,6 +64,18 @@ export default function AppNavigation() {
             options = {{
               headerShown: false,
             }}
+
+            
+          />
+
+<Stack.Screen
+            name = "Caption"
+            component = {Caption}
+            options = {{
+              headerShown: false,
+            }}
+
+            
           />
         {/* {userInfo?.access_token ? (
           <Stack.Screen

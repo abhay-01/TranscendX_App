@@ -8,6 +8,7 @@ import {
     UserCircleIcon,
     BellAlertIcon,
     MapPinIcon,
+    PhotoIcon
   } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 
@@ -60,9 +61,9 @@ export default function BottomTab({ logout }) {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={{ width: 50 }} onPress={logout}>
+      <TouchableOpacity style={{ width: 50 }}  onPress={() => navigation.navigate("Caption")}>
         <View style={{ alignItems: 'center' }}>
-          <BellAlertIcon color={"#000"} size={50} />
+          <PhotoIcon color={"#000"} size={50} />
           <Text style={{ color: 'grey' }}>Inbox</Text>
         </View>
       </TouchableOpacity>
