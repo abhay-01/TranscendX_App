@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Bars3Icon,
@@ -50,13 +50,16 @@ export default function HomeScreen() {
             alignItems: "center",
             paddingHorizontal: 20,
             paddingVertical: 13,
-            justifyContent: "flex-end",
+            justifyContent: 'flex-end',
           }}
         >
           <TouchableOpacity>
             <Bars3Icon color={"#000"} size={30} />
           </TouchableOpacity>
         </View>
+        
+        <Image source={require('../assets/logo/logo.jpg')} style={{width: 320, height: 200, marginHorizontal: 40, marginTop: 20}} />
+        <Text style={{ fontSize: 17, marginLeft: 45, color: "grey", marginTop: 0 }}>Beyond the frame, beyond expectations</Text>
         <BottomTab logout={logout} />
       </View>
     </SafeAreaView>
