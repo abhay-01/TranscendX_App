@@ -25,7 +25,7 @@ export default function BottomTab({ logout }) {
         justifyContent: "space-between",
       }}
     >
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
         <View style={{ alignItems: 'center', paddingLeft: 5 }}>
           <HomeIcon color={"#000"} size={50} />
           <Text style={{ color: 'grey' }}>Home</Text>
