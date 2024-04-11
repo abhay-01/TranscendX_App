@@ -1,5 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Image, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   EnvelopeIcon,
@@ -18,6 +26,7 @@ export default function UploadImage() {
   const [caption, setCaption] = useState("");
   const [textSolution, setTextSolution] = useState("");
   const [url, setUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
   const navigation = useNavigation();
 
   const handlePress = async () => {
@@ -36,7 +45,6 @@ export default function UploadImage() {
       setUrl(url);
 
       // Navigate to ResultScreen passing states as route params
-
       navigation.navigate("ResultScreen", {
         caption: caption,
         textSolution: textSolution,
@@ -47,89 +55,60 @@ export default function UploadImage() {
     }
   };
 
-  const fetchPrompt = async () => {
-    try {
-      const result = await axios.post(
-        "https://transcendx.onrender.com/prompt",
-        {
-          url: imageUrl,
-        }
-      );
-
-      console.log("Prompt:", result.data);
-      setDescription(result.data);
-      inputRef.current.focus();
-    } catch (error) {
-      console.log("Error fetching prompt:", error);
-    }
-  };
-
-  if (imageUrl) {
-    fetchPrompt();
-  }
-  const [imageUrl, setImageUrl] = useState(null);
-
   const handleImageUrl = (url) => {
-    // console.log("URL", url);
     setImageUrl(url);
   };
 
-  console.log("Passed URL", imageUrl);
-
   return (
-    
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
-    <SafeAreaView style={styles.container}>
-    <View style={{ flexGrow: 1 }}>
-      <View style={styles.header}>
-        <TouchableOpacity>
-          <Bars3Icon color={"#000"} />
-        </TouchableOpacity>
-      </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <SafeAreaView style={styles.container}>
+        <View style={{ flex: 1 }}>
+          <View style={styles.imageContainer}>
+            {/* Image component to display the image */}
+            {imageUrl && (
+              <Image source={{ uri: imageUrl }} style={styles.image} />
+            )}
+          </View>
 
-      <View style={styles.imageContainer}>
-        {/* Image component to display the image */}
-        <Image source={{ uri: url }} style={styles.image} />
-      </View>
-      <Text
-        style={{
-          color: "#000",
-          marginVertical: 0,
-          fontSize: 25,
-          paddingHorizontal: 25,
-        }}
-      >
-        Image Description
-      </Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Describe your Image..."
-          style={styles.textInput}
-          onChangeText={(text) => setDescription(text)}
-          value={description}
-          multiline
-        />
-      </View>
+          <View style={styles.optionsContainer}>
+            <TouchableOpacity
+              style={styles.optionButton}
+              onPress={() => console.log("Camera pressed")}
+            >
+              <Text style={styles.optionText}>Camera</Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity style={styles.submitButton} onPress={handlePress}>
-        <Text style={styles.submitText}>Submit</Text>
-      </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.optionButton}
+              onPress={() => console.log("Gallery pressed")}
+            >
+              <Text style={styles.optionText}>Gallery</Text>
+            </TouchableOpacity>
+          </View>
 
-      <Text
-        style={{
-          color: "#000",
-          textAlign: "center",
-          marginTop: 10,
-          fontSize: 20,
-        }}
-      >
-        OR
-      </Text>
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.descriptionText}>Image Description</Text>
+            <TextInput
+              placeholder="Describe your Image..."
+              style={styles.textInput}
+              onChangeText={(text) => setDescription(text)}
+              value={description}
+              multiline
+            />
 
-      <ImagePickerComp OnImageUrl={handleImageUrl} />
-      </View>
-      <BottomTab />
-    </SafeAreaView>
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={handlePress}
+            >
+              <Text style={styles.submitText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <BottomTab />
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 }
@@ -139,45 +118,55 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingTop: 13,
-    justifyContent: "flex-end",
-  },
   imageContainer: {
     alignItems: "center",
-    marginTop: 20,
+    justifyContent: "center",
+    backgroundColor: "#64CCC5",
+    height: "50%",
   },
   image: {
     width: 200,
     height: 200,
     borderRadius: 20,
   },
-  inputContainer: {
-    borderWidth: 2,
-    backgroundColor: "white",
+  optionsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 20,
+  },
+  optionButton: {
+    backgroundColor: "#fff",
+    padding: 10,
     borderRadius: 10,
-    marginHorizontal: 20,
-    padding: 20,
-    marginTop: 10,
-    height: 90,
+    borderWidth: 1,
+    borderColor: "#64CCC5",
+  },
+  optionText: {
+    color: "#64CCC5",
+    fontSize: 16,
+  },
+  descriptionContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  descriptionText: {
+    color: "#000",
+    fontSize: 20,
+    marginBottom: 10,
   },
   textInput: {
-    height: 50,
-    borderRadius: 20,
-    marginTop: 0,
-    width: "90%",
+    borderWidth: 2,
+    borderColor: "#000",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
   },
   submitButton: {
     backgroundColor: "#000",
     borderRadius: 10,
-    marginHorizontal: 45,
     alignItems: "center",
     justifyContent: "center",
     height: 40,
-    marginTop: 20,
   },
   submitText: {
     color: "white",

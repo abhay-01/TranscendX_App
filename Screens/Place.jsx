@@ -1,17 +1,29 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Button,
+} from "react-native";
 import axios from "axios";
 import BottomTab from "../components/bottombar";
+import { Ionicons } from "@expo/vector-icons";
 
-const Place = () => {
+const Place = ({ navigation }) => {
   const [placeName, setPlaceName] = useState("");
   const [placeData, setPlaceData] = useState(null);
 
   const fetchData = async () => {
     try {
-      const response = await axios.post("https://transcendx.onrender.com/place", {
-        name: placeName,
-      });
+      const response = await axios.post(
+        "https://transcendx.onrender.com/place",
+        {
+          name: placeName,
+        }
+      );
       const data = response.data;
 
       // Extracting important details
@@ -44,41 +56,83 @@ const Place = () => {
   };
 
   return (
-    <View style={{
-          flex: 1,
-          backgroundColor: "#f0f0f0",
-          // alignItems: "center",
-          justifyContent: "center",
-    }}>
-    <View style={{alignItems: "center"}}>
-    <Text style={{color: '#000', paddingTop: 50, fontSize: 25, paddingBottom: 10}}>Name of Place</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Type to search"
-        value={placeName}
-        onChangeText={setPlaceName}
-      />
-      <TouchableOpacity style={styles.button} onPress={fetchData}>
-        <Text style={styles.buttonText}>Search</Text>
-      </TouchableOpacity>
-      {placeData && (
-        <ScrollView style={styles.placeDetailsContainer}>
-          <Text style={styles.sectionTitle}>Best Places to Visit</Text>
-          {placeData.bestPlaces.map((place, index) => (
-            <Text key={index} style={styles.placeInfo}>{place}</Text>
-          ))}
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#f0f0f0",
+        justifyContent: "center",
+      }}
+    >
+      <View style={{ alignItems: "center" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            justifyContent: "center",
+          }}
+        >
+          <View
+            style={{
+              alignSelf: "flex-start",
+              marginRight: 96,
+              marginTop: 65,
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={{
+                alignSelf: "flex-start",
+              }}
+            >
+              <Ionicons name="arrow-back" size={24} color="black" />
+            </TouchableOpacity>
+          </View>
 
-          <Text style={styles.sectionTitle}>Cultural Events</Text>
-          {placeData.culturalEvents.map((event, index) => (
-            <View key={index}>
-              <Text style={styles.eventTitle}>{event.event}</Text>
-              <Text style={styles.eventDetails}>{event.details}</Text>
-            </View>
-          ))}
-        </ScrollView>
-      )}
+          <Text
+            style={{
+              color: "#000",
+              paddingTop: 50,
+              fontSize: 25,
+              paddingBottom: 10,
+              marginBottom: 25,
+              marginTop: 10,
+              marginRight: 97,
+                    }}
+          >
+            Name of Place
+          </Text>
+        </View>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Enter place or Place description"
+          value={placeName}
+          onChangeText={setPlaceName}
+        />
+        <TouchableOpacity style={styles.button} onPress={fetchData}>
+          <Text style={styles.buttonText}>Search</Text>
+        </TouchableOpacity>
+        {placeData && (
+          <ScrollView style={styles.placeDetailsContainer}>
+            <Text style={styles.sectionTitle}>Best Places to Visit</Text>
+            {placeData.bestPlaces.map((place, index) => (
+              <Text key={index} style={styles.placeInfo}>
+                {place}
+              </Text>
+            ))}
+
+            <Text style={styles.sectionTitle}>Cultural Events</Text>
+            {placeData.culturalEvents.map((event, index) => (
+              <View key={index}>
+                <Text style={styles.eventTitle}>{event.event}</Text>
+                <Text style={styles.eventDetails}>{event.details}</Text>
+              </View>
+            ))}
+          </ScrollView>
+        )}
       </View>
-    <BottomTab style={{ marginTop: 'auto'}} />
+      <BottomTab style={{ marginTop: "auto" }} />
     </View>
   );
 };
@@ -87,7 +141,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 2,
     borderColor: "#000",
-    borderRadius: 5,
+    borderRadius: 18,
     marginBottom: 20,
     width: "90%",
     backgroundColor: "#ECECEC",
@@ -96,9 +150,9 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   button: {
-    backgroundColor: "#000",
+    backgroundColor: "#176B87",
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 20,
     width: "80%",
     alignItems: "center",
     marginBottom: 10,
