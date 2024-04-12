@@ -8,6 +8,7 @@ import {
     MapPinIcon,
     PhotoIcon,
     HomeIcon,
+    ChatBubbleBottomCenterIcon,
   } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 
@@ -63,13 +64,13 @@ export default function BottomTab({ logout }) {
       <TouchableOpacity style={{ width: 50 }}  onPress={() => navigation.navigate("Caption")}>
         <View style={{ alignItems: 'center' }}>
           <PhotoIcon color={"#64CCC5"} size={50} />
-          <Text style={{ color: 'grey' }}>Inbox</Text>
+          <Text style={{ color: 'grey' }}>Caption</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.navigate("ChatBot")}>
         <View style={{ alignItems: 'center', paddingRight: 5 }}>
-          <UserCircleIcon color={"#64CCC5"} size={50} />
-          <Text style={{ color: 'grey' }}>Account</Text>
+          <ChatBubbleBottomCenterIcon color={"#64CCC5"} size={50} />
+          <Text style={{ color: 'grey' }}>Chat Bot</Text>
         </View>
       </TouchableOpacity>
     </View>

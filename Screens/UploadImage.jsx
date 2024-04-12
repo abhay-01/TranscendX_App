@@ -74,19 +74,8 @@ export default function UploadImage() {
           </View>
 
           <View style={styles.optionsContainer}>
-            <TouchableOpacity
-              style={styles.optionButton}
-              onPress={() => console.log("Camera pressed")}
-            >
-              <Text style={styles.optionText}>Camera</Text>
-            </TouchableOpacity>
+          <ImagePickerComp OnImageUrl={handleImageUrl} />
 
-            <TouchableOpacity
-              style={styles.optionButton}
-              onPress={() => console.log("Gallery pressed")}
-            >
-              <Text style={styles.optionText}>Gallery</Text>
-            </TouchableOpacity>
           </View>
 
           <View style={styles.descriptionContainer}>
@@ -148,21 +137,22 @@ const styles = StyleSheet.create({
   descriptionContainer: {
     paddingHorizontal: 20,
     paddingTop: 20,
+    marginTop:55
   },
   descriptionText: {
     color: "#000",
     fontSize: 20,
-    marginBottom: 10,
+    marginBottom: 25,
   },
   textInput: {
     borderWidth: 2,
-    borderColor: "#000",
+    borderColor: "#176B87",
     borderRadius: 10,
     padding: 10,
     marginBottom: 20,
   },
   submitButton: {
-    backgroundColor: "#000",
+    backgroundColor: "#64CCC5",
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",

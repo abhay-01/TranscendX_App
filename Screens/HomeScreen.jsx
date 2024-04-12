@@ -2,7 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
-  Bars3Icon,
+  
+  UserIcon,
+  UserCircleIcon
 } from "react-native-heroicons/solid";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
@@ -54,7 +56,7 @@ export default function HomeScreen() {
           }}
         >
           <TouchableOpacity>
-            <Bars3Icon color={"#000"} size={30} />
+            <UserCircleIcon color={"#66CCC5"} size={30} onPress={()=> navigation.navigate("Account")}/>
           </TouchableOpacity>
         </View>
         

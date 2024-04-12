@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "../Screens/Login";
@@ -11,6 +10,8 @@ import { useContext } from "react";
 import ResultScreen from "../Screens/ResultScreen";
 import Place from "../Screens/Place";
 import Caption from "../Screens/Caption";
+import ChatBot from "../Screens/ChatBot";
+import Account from "../Screens/Account";
 
 const Stack = createStackNavigator();
 export default function AppNavigation() {
@@ -65,6 +66,14 @@ export default function AppNavigation() {
             headerShown: false,
           }}
         />
+{/* 
+        <Stack.Screen
+        name = "ChatBot"
+        component={ChatBot}
+        options={{
+          headerShown: false,
+        }}
+        /> */}
 
         <Stack.Screen
           name="Caption"
@@ -72,6 +81,22 @@ export default function AppNavigation() {
           options={{
             headerShown: false,
           }}
+        />
+
+        <Stack.Screen
+        name = "ChatBot"
+        component={ChatBot}
+        options={{
+          headerShown: false,
+        }}
+        />
+
+        <Stack.Screen
+        name = "Account"
+        component={Account}
+        options={{
+          headerShown: false,
+        }}
         />
         {/* {userInfo?.access_token ? (
           <Stack.Screen
