@@ -79,32 +79,31 @@ export const ImagePickerComp =  ({OnImageUrl}) => {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-around",
-        margin: 4,
+        margin: 2,
+        marginLeft: 70,
       }}
     >
       <TouchableOpacity onPress={() => openCameraWithPermission()}>
-        {responseCamera === null ? (
-          <View style = {{
-            alignItems: "center"
-            
-          }}>
+      <View
+        style={{
+          alignItems: "center",
+          marginRight: 60,
+          borderWidth: 2, 
+          borderColor: "#176B87",
+          borderRadius: 100, 
+          padding: 10,
+        }}
+      >
             <CameraIcon style = {{
                 height: 300,
                 width: 200,
-                color:"#000"
+                color:"#000",
             }} />
             <Text style = {{
                 color: "#000"
             
             }}>Camera</Text>
             </View>
-        ) : (
-            <Image style={{
-                height: 200,
-                width: 200,
-                color: "#000"
-            }} source={{uri: responseCamera.assets[0].uri}} />
-        )}
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() =>
@@ -127,12 +126,16 @@ export const ImagePickerComp =  ({OnImageUrl}) => {
             }
           )
         }
-      >
-        {responseGallery === null ? (
-            <View style = {{
-              alignItems: "center"
-              
-            }}>
+      ><View
+      style={{
+        alignItems: "center",
+        marginRight: 60,
+        borderWidth: 2, 
+        borderColor: "#176B87",
+        borderRadius: 100,
+        padding: 10, 
+      }}
+    >
               <PhotoIcon style = {{
                   height: 300,
                   width: 200,
@@ -143,14 +146,6 @@ export const ImagePickerComp =  ({OnImageUrl}) => {
               
               }}>Gallery</Text>
               </View>
-        ) : (
-            <Image style = {{
-                height: 200,
-                width: 200,
-                color: "#000"
-            
-            }} source={{uri: responseGallery.assets[0].uri}} />
-            )}
       </TouchableOpacity>
     </View>
   );

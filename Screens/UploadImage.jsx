@@ -7,6 +7,7 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
+  ScrollView
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -64,7 +65,7 @@ export default function UploadImage() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
     >
-      <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={{ flex: 1 }}>
           <View style={styles.imageContainer}>
             {/* Image component to display the image */}
@@ -96,8 +97,9 @@ export default function UploadImage() {
             </TouchableOpacity>
           </View>
         </View>
-        <BottomTab />
-      </SafeAreaView>
+      </ScrollView>
+      <BottomTab style={{ marginTop: "auto" }} />
+
     </KeyboardAvoidingView>
   );
 }

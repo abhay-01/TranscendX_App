@@ -40,23 +40,47 @@ const Caption = () => {
   return (
     <View style={styles.container}>
       <ImagePickerComp OnImageUrl={handleImageUrl} />
-      <View style ={{
-        alignItems: "center",
-        justifyContent: "center",
-        // padding: 20
-      }}>
+      <View
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 20,
+        }}
+      >
+        {captions === undefined ? (
+          <Text
+            style={{
+              color: "#000",
+              fontSize: 20,
+              fontWeight: "bold",
+              textAlign: "center",
+              backgroundColor: "#ddd",
+              padding: 10,
+              borderRadius: 10,
+              margin: 10,
+            }}
+          >
+            Loading...
+          </Text>
+        ) : (
+          <Text
+            style={{
+              color: "#000",
+              fontSize: 20,
+              fontWeight: "bold",
+              textAlign: "center",
+              backgroundColor: "#ddd",
+              padding: 10,
+              borderRadius: 10,
+              margin: 10,
+            }}
+          >
+            {captions}
+          </Text>
+        )}
+      </View>
 
-      <Text style = {{
-        color: "#000",
-        fontSize: 20,
-        fontWeight: "bold",
-        textAlign: "center"
-      
-      }}>{captions}</Text> 
-            </View>
-
-            <BottomTab marginTop ="auto"/>
-
+      <BottomTab style={{ marginTop: "auto" }} />
     </View>
   );
 };
@@ -69,6 +93,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     backgroundColor: "#f5f5f5",
-    marginTop:30
+    marginTop: 30,
   },
 });

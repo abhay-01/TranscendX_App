@@ -6,10 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Button,
 } from "react-native";
 import axios from "axios";
-import BottomTab from "../components/bottombar";
 import { Ionicons } from "@expo/vector-icons";
 
 const Place = ({ navigation }) => {
@@ -18,6 +16,7 @@ const Place = ({ navigation }) => {
 
   const fetchData = async () => {
     try {
+      // Assuming your backend API endpoint is correct
       const response = await axios.post(
         "https://transcendx.onrender.com/place",
         {
@@ -26,80 +25,28 @@ const Place = ({ navigation }) => {
       );
       const data = response.data;
 
-      // Extracting important details
-      const { bestPlaces, culturalEvents } = extractDetails(data);
+      console.log("Place data:", response.data.destination);
 
-      setPlaceData({ bestPlaces, culturalEvents });
+      // Extracting important details
+      const { estheticsLocations, hotels, restaurants, culturalHappenings } = data;
+
+      setPlaceData({ estheticsLocations, hotels, restaurants, culturalHappenings });
     } catch (error) {
       console.error("Error fetching place data:", error);
     }
   };
 
-  // Extract important details from the response data
-  const extractDetails = (data) => {
-    const bestPlacesRegex = /\*\*(.*?)\*\*/g;
-    const culturalEventsRegex = /(?:\*\*(.*?)\*\*:\*\*(.*?)\*\*)/g;
-
-    let bestPlaces = [];
-    let culturalEvents = [];
-
-    let match;
-    while ((match = bestPlacesRegex.exec(data)) !== null) {
-      bestPlaces.push(match[1]);
-    }
-
-    while ((match = culturalEventsRegex.exec(data)) !== null) {
-      culturalEvents.push({ event: match[1], details: match[2] });
-    }
-
-    return { bestPlaces, culturalEvents };
-  };
-
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#f0f0f0",
-        justifyContent: "center",
-      }}
-    >
+    <View style={{ flex: 1, backgroundColor: "#f0f0f0", justifyContent: "center" }}>
       <View style={{ alignItems: "center" }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            width: "100%",
-            justifyContent: "center",
-          }}
-        >
-          <View
-            style={{
-              alignSelf: "flex-start",
-              marginRight: 96,
-              marginTop: 65,
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={{
-                alignSelf: "flex-start",
-              }}
-            >
+        <View style={{ flexDirection: "row", alignItems: "center", width: "100%", justifyContent: "center" }}>
+          <View style={{ alignSelf: "flex-start", marginRight: 96, marginTop: 65 }}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={{ alignSelf: "flex-start" }}>
               <Ionicons name="arrow-back" size={24} color="black" />
             </TouchableOpacity>
           </View>
 
-          <Text
-            style={{
-              color: "#000",
-              paddingTop: 50,
-              fontSize: 25,
-              paddingBottom: 10,
-              marginBottom: 25,
-              marginTop: 10,
-              marginRight: 97,
-                    }}
-          >
+          <Text style={{ color: "#000", paddingTop: 50, fontSize: 25, paddingBottom: 10, marginBottom: 25, marginTop: 10, marginRight: 97 }}>
             Name of Place
           </Text>
         </View>
@@ -116,23 +63,35 @@ const Place = ({ navigation }) => {
         {placeData && (
           <ScrollView style={styles.placeDetailsContainer}>
             <Text style={styles.sectionTitle}>Best Places to Visit</Text>
-            {placeData.bestPlaces.map((place, index) => (
+            {placeData.estheticsLocations?.map((place, index) => (
               <Text key={index} style={styles.placeInfo}>
                 {place}
               </Text>
             ))}
 
-            <Text style={styles.sectionTitle}>Cultural Events</Text>
-            {placeData.culturalEvents.map((event, index) => (
-              <View key={index}>
-                <Text style={styles.eventTitle}>{event.event}</Text>
-                <Text style={styles.eventDetails}>{event.details}</Text>
-              </View>
+            <Text style={styles.sectionTitle}>Hotels</Text>
+            {placeData.hotels?.map((hotel, index) => (
+              <Text key={index} style={styles.placeInfo}>
+                {hotel}
+              </Text>
+            ))}
+
+            <Text style={styles.sectionTitle}>Restaurants</Text>
+            {placeData.restaurants?.map((restaurant, index) => (
+              <Text key={index} style={styles.placeInfo}>
+                {restaurant}
+              </Text>
+            ))}
+
+            <Text style={styles.sectionTitle}>Cultural Happenings</Text>
+            {placeData.culturalHappenings?.map((event, index) => (
+              <Text key={index} style={styles.placeInfo}>
+                {event}
+              </Text>
             ))}
           </ScrollView>
         )}
       </View>
-      <BottomTab style={{ marginTop: "auto" }} />
     </View>
   );
 };
@@ -176,16 +135,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: "#444",
   },
-  eventTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5,
-    color: "#333",
-  },
-  eventDetails: {
-    fontSize: 16,
-    marginBottom: 10,
-    color: "#444",
-  },
 });
+
 export default Place;
