@@ -10,7 +10,7 @@ const Caption = () => {
 
   const fetchCaptions = async () => {
     try {
-      console.log("IMAGE URL-->", imageUrl);
+      console.log("IMAGE URL", imageUrl);
       setCaptions(undefined);
       const response = await axios.post(
         "https://transcendx.onrender.com/caption",
