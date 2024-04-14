@@ -12,11 +12,10 @@ import Caption from "../Screens/Caption";
 import ChatBot from "../Screens/ChatBot";
 import Account from "../Screens/Account";
 
-
 const Stack = createStackNavigator();
 
 export default function AppNavigation() {
-  const [initialRoute, setInitialRoute] = useState("HomeScreen");
+  const [initialRoute, setInitialRoute] = useState("Login");
 
   useEffect(() => {
     checkLoginStatus();
@@ -36,7 +35,7 @@ export default function AppNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={initialRoute}>
-      <Stack.Screen
+        <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{
@@ -81,7 +80,7 @@ export default function AppNavigation() {
             headerShown: false,
           }}
         />
-{/* 
+        {/* 
         <Stack.Screen
         name = "ChatBot"
         component={ChatBot}
@@ -99,22 +98,20 @@ export default function AppNavigation() {
         />
 
         <Stack.Screen
-        name = "ChatBot"
-        component={ChatBot}
-        options={{
-          headerShown: false,
-        }}
+          name="ChatBot"
+          component={ChatBot}
+          options={{
+            headerShown: false,
+          }}
         />
 
         <Stack.Screen
-        name = "Account"
-        component={Account}
-        options={{
-          headerShown: false,
-        }}
+          name="Account"
+          component={Account}
+          options={{
+            headerShown: false,
+          }}
         />
-
-
       </Stack.Navigator>
     </NavigationContainer>
   );
